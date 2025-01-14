@@ -545,6 +545,23 @@ GLFWAPI void glfwSetWindowTitle(GLFWwindow* handle, const char* title)
     _glfw_free(prev);
 }
 
+GLFWAPI void glfwSetWindowTitleFromRange(GLFWwindow* handle, const char* title, size_t len)
+{
+    assert(title != NULL);
+
+    _GLFW_REQUIRE_INIT();
+
+    _GLFWwindow* window = (_GLFWwindow*) handle;
+    assert(window != NULL);
+
+    char* prev = window->title;
+    char* new_title = _glfw_strndup(title, len);
+    window->title = new_title;
+
+    _glfw.platform.setWindowTitle(window, new_title);
+    _glfw_free(prev);
+}
+
 GLFWAPI void glfwSetWindowIcon(GLFWwindow* handle,
                                int count, const GLFWimage* images)
 {

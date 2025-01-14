@@ -236,6 +236,15 @@ char* _glfw_strdup(const char* source)
     return result;
 }
 
+char* _glfw_strndup(const char* source, size_t max_len)
+{
+    const size_t length = strlen(source);
+    const size_t min_length = (length < max_len ? length : max_len);
+    char* result = _glfw_calloc(min_length + 1, 1);
+    strncpy(result, source, min_length);
+    return result;
+}
+
 int _glfw_min(int a, int b)
 {
     return a < b ? a : b;

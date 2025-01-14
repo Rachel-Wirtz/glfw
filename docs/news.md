@@ -24,6 +24,8 @@ this.
 
 ### New functions {#new_functions}
 
+- @ref SetWindowTitleFromRange allowing supply of non-null-terminated sub-strings as window title
+
 ### New types {#new_types}
 
 ### New constants {#new_constants}

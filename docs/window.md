@@ -898,7 +898,7 @@ glfwGetWindowPos(window, &xpos, &ypos);
 
 All GLFW windows have a title, although undecorated or full screen windows may
 not display it or only display it in a task bar or similar interface.  You can
-set a new UTF-8 encoded window title with @ref glfwSetWindowTitle.
+set a new UTF-8 encoded window title with @ref glfwSetWindowTitle or @ref glfwSetWindowTitleFromRange.
 
 ```c
 glfwSetWindowTitle(window, "My Window");
@@ -918,6 +918,13 @@ If you are using C++11 or C11, you can use a UTF-8 string literal.
 
 ```c
 glfwSetWindowTitle(window, u8"This is always a UTF-8 string");
+```
+
+You can use a sub string instead of copying the needed portion of your string.
+
+```c
+const char* cfg = "{'title':'My Window'}";
+glfwSetWindowTitleFromRange(window, cfg + 10, 9);
 ```
 
 The current window title can be queried with @ref glfwGetWindowTitle.

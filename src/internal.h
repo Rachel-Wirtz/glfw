@@ -1013,6 +1013,7 @@ size_t _glfwEncodeUTF8(char* s, uint32_t codepoint);
 char** _glfwParseUriList(char* text, int* count);
 
 char* _glfw_strdup(const char* source);
+char* _glfw_strndup(const char* source, size_t max_len);
 int _glfw_min(int a, int b);
 int _glfw_max(int a, int b);
 

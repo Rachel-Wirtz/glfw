@@ -3309,8 +3309,8 @@ GLFWAPI void glfwSetWindowShouldClose(GLFWwindow* window, int value);
 /*! @brief Returns the title of the specified window.
  *
  *  This function returns the window title, encoded as UTF-8, of the specified
- *  window.  This is the title set previously by @ref glfwCreateWindow
- *  or @ref glfwSetWindowTitle.
+ *  window.  This is the title set previously by @ref glfwCreateWindow,
+ *  @ref glfwSetWindowTitle or @ref glfwSetWindowTitleFromRange.
  *
  *  @param[in] window The window to query.
  *  @return The UTF-8 encoded window title, or `NULL` if an
@@ -3319,18 +3319,20 @@ GLFWAPI void glfwSetWindowShouldClose(GLFWwindow* window, int value);
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED.
  *
  *  @remark The returned title is currently a copy of the title last set by @ref
- *  glfwCreateWindow or @ref glfwSetWindowTitle.  It does not include any
- *  additional text which may be appended by the platform or another program.
+ *  glfwCreateWindow, @ref glfwSetWindowTitle or @ref glfwSetWindowTitleFromRange.
+ *  It does not include any additional text which may be appended by the platform 
+ *  or another program.
  *
  *  @pointer_lifetime The returned string is allocated and freed by GLFW.  You
  *  should not free it yourself.  It is valid until the next call to @ref
- *  glfwGetWindowTitle or @ref glfwSetWindowTitle, or until the library is
- *  terminated.
+ *  glfwGetWindowTitle, @ref glfwSetWindowTitle or @ref glfwSetWindowTitleFromRange,
+ *  or until the library is terminated.
  *
  *  @thread_safety This function must only be called from the main thread.
  *
  *  @sa @ref window_title
  *  @sa @ref glfwSetWindowTitle
+ *  @sa @ref glfwSetWindowTitleFromRange
  *
  *  @since Added in version 3.4.
  *
@@ -3363,6 +3365,37 @@ GLFWAPI const char* glfwGetWindowTitle(GLFWwindow* window);
  *  @ingroup window
  */
 GLFWAPI void glfwSetWindowTitle(GLFWwindow* window, const char* title);
+
+/*! @brief Sets the title of the specified window.
+ *
+ *  This function sets the window title, from a range or sub string encoded as 
+ *  UTF-8, of the specified window.
+ * 
+ *  The range or sub string defined by title and title+len does not require 
+ *  to be null-terminated. The occurrence of a null-terminator before the end
+ *  of the range specified defines the end of the effective range supplied as
+ *  window title.
+ *
+ *  @param[in] window The window whose title to change.
+ *  @param[in] title The UTF-8 encoded window title.
+ *  @param[in] len The length of the UTF-8 encoded window title.
+ *
+ *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
+ *  GLFW_PLATFORM_ERROR.
+ *
+ *  @remark @macos The window title will not be updated until the next time you
+ *  process events.
+ *
+ *  @thread_safety This function must only be called from the main thread.
+ *
+ *  @sa @ref window_title
+ *  @sa @ref glfwGetWindowTitle
+ *
+ *  @since Added in version 3.4.
+ *
+ *  @ingroup window
+ */
+GLFWAPI void glfwSetWindowTitleFromRange(GLFWwindow* window, const char* title, size_t len);
 
 /*! @brief Sets the icon for the specified window.
  *
